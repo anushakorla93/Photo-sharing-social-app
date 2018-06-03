@@ -1,0 +1,75 @@
+  <!-- <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.title %></td>
+        <td><%=image_tag(post.photo.url, alt: 'Image') if post.photo?%></td>
+        <td><%= post.user %></td>
+        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Post', new_post_path %> -->
+<%if user_signed_in?%>
+<h6 class="text-left text-secondary mt-2">You have created <%=current_user.posts.count%> Posts </h6>
+<%end%>
+<div class="container justify-content-center post-width mt-5">
+  <div class="jumbotron my-auto">
+    <%if @posts.present? %>
+      <h3 class="text-center text-primary mb-5">Posts</h3>
+      <% @posts.each do |post| %>
+        <div class="ml-5 mb-1">
+          <b class="text-secondary"><%= post.title.capitalize %></b> posted by <i class="font-weight-bold text-secondary"><%=post.user.name.capitalize%></i> created on <%= post.created_at.strftime "%A, %b %d" %>
+        </div>
+        <div class="text-center">
+          <%=image_tag(post.photo.url, alt: 'Image', class: "border border-secondary rounded") if post.photo?%>
+        </div>
+        <div class="row col-4 ml-5 mt-1 ml-auto">
+          <div class="col-md-1 ml-auto">
+            <%if user_signed_in? && current_user == post.user %>
+              <%= link_to edit_post_path(post), title: "Edit","data-toggle": "tooltip", "data-placement": "bottom" do %>
+                <i class="fa fa-pencil-square"></i> 
+              <%end%>
+            <%end%>
+          </div>
+          <div class="col-md-1">
+            <%if user_signed_in? && current_user == post.user %>
+              <%= link_to post, method: :delete, data: { confirm: 'Are you sure?' }, title: "Delete","data-toggle": "tooltip", "data-placement": "bottom" do %>
+                <i class="fa fa-trash"></i>
+              <%end%>
+            <%end%>
+          </div>
+          <div class="col-md-1 mr-5">
+            <%if user_signed_in? %>
+              <% if current_user != post.user %>
+                <a href="#", onclick="subscribe(<%= current_user.id %>, <%= post.id %>);", data-toggle="tooltip" data-placement="bottom" title="Subscribe">
+                  <i class="fa fa-plus-square-o"></i>
+                </a>
+              <%end%>
+            <%else%>
+              <%=link_to subscription_path, title: "Subscribe", "data-toggle": "tooltip", "data-placement": "bottom" do %>
+                <i class="fa fa-plus-square-o"></i>
+              <%end%>
+            <%end%>
+          </div>
+        </div>
+        <br>
+      <%end%>
+    <%else%>
+      <h4 class="text-center text-secondary">No posts have been created yet</h4>
+    <%end%>
+  </div>
+</div>
+<script type="text/javascript">
+  function subscribe(user_id,post_id) {
+  $.ajax({ 
+       url: '/subscribe', 
+       data: $.param({ subscribe: {user_id: user_id, post_id: post_id }})
+  });
+ }
+</script>

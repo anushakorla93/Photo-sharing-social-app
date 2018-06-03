@@ -1,0 +1,29 @@
+<div class="container justify-content-center post-width mt-5">
+  <div class="jumbotron my-auto">
+    <%if @subscribers.present? %>
+      <h3 class="text-center text-primary mb-5">Subscribed Posts</h3>
+      <% @subscribers.each do |s| %>
+        <% post = Post.find(s.post_id) %>
+        <div class="ml-5 mb-1">
+          <b class="text-secondary"><%= post.title.capitalize %></b> posted by <i class="font-weight-bold text-secondary"><%=post.user.name.capitalize%></i>
+        </div>
+        <div class="text-center">
+          <%=image_tag(post.photo.url, alt: 'Image', class: "border border-secondary rounded") if post.photo?%>
+        </div>
+        <div class="row col-4 ml-5 mt-1 ml-auto">
+          <div class="col-md-1 ml-auto">
+            
+          </div>
+          <div class="col-md-1 mr-5">
+            <%= link_to delete_subscriber_path(s), method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <i class="fa fa-trash"></i>
+            <%end%>
+          </div>
+        </div>
+        <br>
+      <%end%>
+    <%else%>
+      <h4 class="text-center text-secondary">No posts have been subscribed</h4>
+    <%end%>
+  </div>
+</div>

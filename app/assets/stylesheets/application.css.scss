@@ -1,0 +1,79 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "bootstrap";
+@import "font-awesome";
+
+h1.display-5{
+	color: #7a00ff;
+	font-weight: 400;
+}
+.login-text{
+	color: #ed617a;
+	font-weight: 400;
+}
+
+label{
+	color: #454141;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.login-width{
+	width: 500px ;
+}
+
+.login-heading{
+	color: #7a00ff;
+}
+
+.alert{
+	width: 50%;
+	text-align: center;
+	margin-left: 300px;
+    margin-top: 10px;
+}
+
+.logout{
+	margin-left: 940px;
+}
+
+#error_explanation{
+	color: red;
+}
+
+img{
+	width: 630px;
+}
+
+.post-width{
+	width: 800px;
+}
+
+.fa-trash{
+	color: red;
+}
+
+.fa-pencil-square{
+	color: #595151;
+}
+
+.fa-plus-square-o{
+	color: #ff5e00;
+}
+
+.login{
+	margin-left: 1080px;
+}
